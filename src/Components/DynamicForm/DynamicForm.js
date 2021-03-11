@@ -1,25 +1,30 @@
 import React,{useState} from 'react'
 import './styles.css'
 const DynamicForm = ({model,title,setData}) => {
-    const validate= (regex,text)=> {
-        const regexp = regex;
-        return regexp.test(text);
-    }
     const [city,setCity]=useState()
     const [form,setForm]=useState([])
+    const [flag,setFlag]=useState(false)
+
+    const validate= (regex,text)=> {
+        setFlag((regex).test(text));
+        console.log(flag)
+    }
       
    const HandleOnBlur=(value) =>{
-    if(value==="" || form.includes(value)) return null;
+    if(value==="" || form.includes(value) ) return null;
        setForm((prevData)=>{
            return [...prevData,value]
        })
        console.log(form)
    }
    const handleSubmit=(value)=>{
-        setData(value)
+       if(flag){
+           setData(value)
+       }
    }
     return (
         <div className="dynamic-form">
+        <h1 className="center">{title}</h1>
             {model.map((input)=>(
                 <div key={input.key} className="form-control">
                     <label htmlFor={input.key} key={input.key} className="label" >
@@ -35,7 +40,7 @@ const DynamicForm = ({model,title,setData}) => {
                                 <datalist id={input.list}>
                                 
                                     { input.value.map((val)=>(
-                                        <option value={val}/>
+                                        <option key={val} value={val}/>
                                     ))}
                                 </datalist>
                                 </div>   
@@ -50,7 +55,7 @@ const DynamicForm = ({model,title,setData}) => {
                                     { Object.entries(input.value).map((val)=>{
                                         if(val[0]=== city){
                                             let cities = val[1];
-                                            return cities.map(c =>(<option value={c}/>))
+                                            return cities.map(c =>(<option key={val} value={c}/>))
                                         }
                                     })}
                                     </datalist>
@@ -64,9 +69,9 @@ const DynamicForm = ({model,title,setData}) => {
                                 {Array.isArray(input.value) ?(
                                     <div className="box">
                                     {input.value.map((val)=>(
-                                        <div >
+                                        <div key={val} >
                                             <input  type={input.type} id={input.label} name={input.label} list={input.list} value={val} onBlur={(e)=>HandleOnBlur(e.target.value)} />
-                                            <label for={input.label}>{val}</label><br></br>
+                                            <label htmlFor={input.label}>{val}</label><br></br>
                                         </div>
                                       ))} 
                                       </div>
@@ -74,7 +79,7 @@ const DynamicForm = ({model,title,setData}) => {
                                         <div>
                                         {input.pattern ?(
                                             <div>
-                                                <input onBlur={(e)=>HandleOnBlur(e.target.value)} type={input.type} name={input.label} list={input.list} className="text-input" />
+                                                <input onChange={(e)=>validate(input.pattern,e.target.value)} onBlur={(e)=>HandleOnBlur(e.target.value)} type={input.type} name={input.label} list={input.list} className="text-input" />
                                             </div>
                                             ) :(
                                             <input onBlur={(e)=>HandleOnBlur(e.target.value)} type={input.type} name={input.label} list={input.list} className="text-input" />

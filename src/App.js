@@ -14,9 +14,9 @@ const App=()=> {
       model={[
         {key:"name",label:"name",type:"text"},
         {key:"age",label:"age",type:"number"},
-        {key:"email",label:"email",type:"email",pattern:'/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/'},
+        {key:"email",label:"email",type:"email",pattern:/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/},
         {key:"phoneNo",label:"phone no",type:"number"},
-        {key:"password",label:"password",type:"password" ,pattern:'^([@#](?=[^aeiou]{7,13}$)(?=[[:alnum:]]{7,13}$)(?=.*[A-Z]{1,}.*$).+)$'},
+        {key:"password",label:"password",type:"password" },
         {key:"gender",label:"Gender",type:"radio",value:["male","female","others"]},
         {key:"skills",label:"skills",type:"checkbox",value:["html","css","react","javascript"]},
         {key:"country",label:"country",type:"text",list:'country',value:["india","usa","china","japan"],link:'city'},
