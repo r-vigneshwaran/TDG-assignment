@@ -1,0 +1,40 @@
+.dynamic-form{
+    width:700px;
+    height:fit-content;
+    background:#fff;
+    display:flex;
+    flex-direction:column;
+    margin-top: 250px;
+}
+.form-control{
+    width:50%;
+    height:100%;
+    margin:auto;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:row;
+}
+.text-input{
+    width:240px;
+    height:30px;
+    margin: 10px 10px;
+}
+.label{
+    font-size: 20px;
+    font-weight: bold;
+    color:black;
+    margin-right: auto;
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.box{
+    display: flex;
+    flex-direction:row;
+    justify-content:center;
+}
+button{
+    width: 50%;
+    margin: auto;
+}
